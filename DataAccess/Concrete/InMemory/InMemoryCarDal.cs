@@ -9,40 +9,45 @@ namespace DataAccess.Concrete.InMemory
 {
     public class InMemoryCarDal : ICarDal
     {
-        List<Car> _car;
+        List<Car> _cars;
 
         public InMemoryCarDal()
         {
-            _car = new List<Car> { 
-                new Car{Id=1,BrandId=1,ColorId=1,ModelYear=2016,DailyPrice=130,Description="Beyaz Renault Symbol Dizel Manuel"},
-                new Car{Id=2,BrandId=1,ColorId=3,ModelYear=2017,DailyPrice=150,Description="Mavi Renault Clio Dizel Manuel"},
-                new Car{Id=3,BrandId=2,ColorId=1,ModelYear=2017,DailyPrice=275,Description="Beyaz Hyundai Elantra Dizel Otomatik"},
-                new Car{Id=4,BrandId=2,ColorId=2,ModelYear=2018,DailyPrice=165,Description="Gri Hyundai Accent Dizel Otomatik"},
-                new Car{Id=5,BrandId=3,ColorId=1,ModelYear=2016,DailyPrice=600,Description="Beyaz Porsche Cayenne Benzin Otomatik"}
+            _cars = new List<Car> { 
+                new Car{CarId=1,BrandId=1,ColorId=1,ModelYear="2016",DailyPrice=130,Description="Beyaz Renault Symbol Dizel Manuel"},
+                new Car{CarId=2,BrandId=1,ColorId=3,ModelYear="2017",DailyPrice=150,Description="Mavi Renault Clio Dizel Manuel"},
+                new Car{CarId=3,BrandId=2,ColorId=1,ModelYear="2017",DailyPrice=275,Description="Beyaz Hyundai Elantra Dizel Otomatik"},
+                new Car{CarId=4,BrandId=2,ColorId=2,ModelYear="2018",DailyPrice=165,Description="Gri Hyundai Accent Dizel Otomatik"},
+                new Car{CarId=5,BrandId=3,ColorId=1,ModelYear="2016",DailyPrice=600,Description="Beyaz Porsche Cayenne Benzin Otomatik"}
 
             };
         }
 
         public void Add(Car car)
         {
-            _car.Add(car);
+            _cars.Add(car);
         }
 
         public void Delete(Car car)
         {
-            Car carToDelete = _car.SingleOrDefault(c=>c.Id == car.Id);
-            _car.Remove(carToDelete);
+            Car carToDelete = _cars.SingleOrDefault(c=>c.CarId == car.CarId);
+            _cars.Remove(carToDelete);
         }
 
         public List<Car> GetAll()
         {
-            return _car;
+            return _cars;
+        }
+
+        public List<Car> GetById(int carId)
+        {
+           return _cars.Where(c => c.CarId == carId).ToList();
         }
 
         public void Update(Car car)
         {
-            Car carToUpdate = _car.SingleOrDefault(c => c.Id == car.Id);
-            carToUpdate.Id = car.Id;
+            Car carToUpdate = _cars.SingleOrDefault(c => c.CarId == car.CarId);
+            carToUpdate.CarId = car.CarId;
             carToUpdate.ModelYear = car.ModelYear;
             carToUpdate.ColorId = car.ColorId;
             carToUpdate.BrandId = car.BrandId;
