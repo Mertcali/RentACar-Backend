@@ -20,8 +20,16 @@ namespace Business.Concrete
 
         public void Add(Car car)
         {
-            _carDal.Add(car);
-            Console.WriteLine("Araba eklendi");
+            if (car.Descriptions.Length>2 && car.DailyPrice>0)
+            {
+                _carDal.Add(car);
+                Console.WriteLine("Araba eklendi");
+            }
+            else
+            {
+                Console.WriteLine("Araç eklenemedi.2 Karakterden daha uzun tanım ve 0'dan büyük günlük fiyat giriniz.");
+            }
+            
         }
 
         public void Delete(Car car)
@@ -36,11 +44,23 @@ namespace Business.Concrete
             Console.WriteLine("araçlar listelendi");
         }
 
-        public List<Car> GetById(int carId)
+        public List<Car> GetCarsByBrandId(int brandId)
         {
-            return _carDal.GetById(2);
-            Console.WriteLine(carId + " idsine sahip ürünler listelendi");
+            return _carDal.GetAll(b => b.BrandId == brandId);
+            Console.WriteLine("marka seçimine göre listelendi");
         }
+
+        public List<Car> GetCarsByColorId(int colorId)
+        {
+            return _carDal.GetAll(c => c.ColorId == colorId);
+            Console.WriteLine("renk seçimine göre listelendi");
+        }
+
+        //public List<Car> GetById(int carId)
+        //{
+        //    return _carDal.GetById(2);
+        //    Console.WriteLine(carId + " idsine sahip ürünler listelendi");
+        //}
 
         public void Update(Car car)
         {

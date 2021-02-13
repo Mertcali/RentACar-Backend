@@ -34,12 +34,12 @@ namespace Business.Concrete
             Console.WriteLine("Ürünler listelendi");
         }
 
-        public List<Brand> GetById(int brandId)
-        {
-            return _brandDal.GetById(2);
-            Console.WriteLine(brandId + " idli markalar listelendi");
+        //public List<Brand> GetById(int brandId)
+        //{
+        //    return _brandDal.GetById(2);
+        //    Console.WriteLine(brandId + " idli markalar listelendi");
 
-        }
+        //}
 
         public void Update(Brand brand)
         {

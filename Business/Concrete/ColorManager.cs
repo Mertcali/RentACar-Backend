@@ -34,11 +34,11 @@ namespace Business.Concrete
             Console.WriteLine("renkler listelendi");
         }
 
-        public List<Color> GetById(int colorId)
-        {
-            return _colorDal.GetById(2);
-            Console.WriteLine(colorId + " idli renkler listelendi");
-        }
+        //public List<Color> GetById(int colorId)
+        //{
+        //    return _colorDal.GetById(2);
+        //    Console.WriteLine(colorId + " idli renkler listelendi");
+        //}
 
         public void Update(Color color)
         {
