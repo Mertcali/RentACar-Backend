@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using Entities.DTOs;
@@ -19,59 +21,68 @@ namespace Business.Concrete
         }
 
 
-        public void Add(Car car)
+        public IResult Add(Car car)
         {
-            if (car.Descriptions.Length>2 && car.DailyPrice>0)
+
+            
+            if(car.CarName.Length<2 && car.DailyPrice<0)
             {
-                _carDal.Add(car);
-                Console.WriteLine("Araba eklendi");
+                return new ErrorResult(Messages.CarNameInvalid);
             }
-            else
-            {
-                Console.WriteLine("Araç eklenemedi.2 Karakterden daha uzun tanım ve 0'dan büyük günlük fiyat giriniz.");
-            }
+            _carDal.Add(car);
+
+            return new SuccessResult(Messages.CarsAdded);
             
         }
 
-        public void Delete(Car car)
+        public IResult Delete(Car car)
         {
             _carDal.Delete(car);
-            Console.WriteLine("araba silindi");
+            
+            return new SuccessResult("Ürün Silindi");
         }
 
-        public List<Car> GetAll()
+        public IDataResult<List<Car>> GetAll()
         {
-            return _carDal.GetAll();
-            Console.WriteLine("araçlar listelendi");
+            //if(DateTime.Now.Hour==22)
+            //{
+            //    return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
+            //}
+
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarsListed);         
         }
 
-        public List<Car> GetCarsByBrandId(int brandId)
+        public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
         {
-            return _carDal.GetAll(b => b.BrandId == brandId);
-            Console.WriteLine("marka seçimine göre listelendi");
+            //if (DateTime.Now.Hour == 22)
+            //{
+            //    return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
+            //}
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(b => b.BrandId == brandId), "marka seçimine göre listelendi");
         }
 
-        public List<Car> GetCarsByColorId(int colorId)
+        public IDataResult<List<Car>> GetCarsByColorId(int colorId)
         {
-            return _carDal.GetAll(c => c.ColorId == colorId);
-            Console.WriteLine("renk seçimine göre listelendi");
+            //if (DateTime.Now.Hour == 22)
+            //{
+            //    return new ErrorDataResult<List<Car>>(Messages.MaintenanceTime);
+            //}
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId), "renk seçimine göre listelendi");
         }
 
-        public List<CarDetailDto> GetCarDetails()
+        public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            return _carDal.GetCarDetails();
+            //if (DateTime.Now.Hour == 22)
+            //{
+            //    return new ErrorDataResult<List<CarDetailDto>>(Messages.MaintenanceTime);
+            //}
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(),"Araç detayları:");
         }
 
-        //public List<Car> GetById(int carId)
-        //{
-        //    return _carDal.GetById(2);
-        //    Console.WriteLine(carId + " idsine sahip ürünler listelendi");
-        //}
-
-        public void Update(Car car)
+        public IResult Update(Car car)
         {
              _carDal.Update(car);
-            Console.WriteLine("araç güncellendi");
+            return new SuccessResult(Messages.CarsUpdated);
         }
     }
 }

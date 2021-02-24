@@ -1,4 +1,6 @@
 ﻿using Business.Abstract;
+using Business.Constants;
+using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
 using System;
@@ -16,34 +18,49 @@ namespace Business.Concrete
             _colorDal = colorDal;
         }
 
-        public void Add(Color color)
+        public IResult Add(Color color)
         {
+            if(color.ColorName.Length<2)
+            {
+                return new ErrorResult(Messages.ColorNameInvalid);
+            }
             _colorDal.Add(color);
-            Console.WriteLine("renk eklendi");
+            return new SuccessResult(Messages.ColorsAdded);
+            
         }
 
-        public void Delete(Color color)
+        public IResult Delete(Color color)
         {
             _colorDal.Delete(color);
-            Console.WriteLine("renk silindi");
+            return new SuccessResult(Messages.ColorsDeleted);
+           
         }
 
-        public List<Color> GetAll()
+        public IDataResult<List<Color>> GetAll()
         {
-            return _colorDal.GetAll();
-            Console.WriteLine("renkler listelendi");
+            //if (DateTime.Now.Hour == 22)
+            //{
+            //    return new ErrorDataResult<List<Color>>(Messages.MaintenanceTime);
+            //}
+
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), Messages.ColorsListed);
+
         }
 
-        //public List<Color> GetById(int colorId)
-        //{
-        //    return _colorDal.GetById(2);
-        //    Console.WriteLine(colorId + " idli renkler listelendi");
-        //}
+        public IDataResult<List<Color>> GetById(int colorId)
+        {
+            //if (DateTime.Now.Hour == 22)
+            //{
+            //    return new ErrorDataResult<List<Color>>(Messages.MaintenanceTime);
+            //}
 
-        public void Update(Color color)
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(c=> c.ColorId == colorId), Messages.ColorsListed);
+        }
+
+        public IResult Update(Color color)
         {
             _colorDal.Update(color);
-            Console.WriteLine("Renk güncellendi");
+            return new SuccessResult(Messages.ColorsUpdated);
         }
     }
 }

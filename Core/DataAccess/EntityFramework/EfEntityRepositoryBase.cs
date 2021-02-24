@@ -50,11 +50,6 @@ namespace Core.DataAccess.EntityFramework
             }
         }
 
-        //public List<Car> GetById(int carId)
-        //{
-        //    throw new NotImplementedException();
-        //}
-
         public void Update(TEntity entity)
         {
             using (TContext context = new TContext())
