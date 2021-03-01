@@ -50,7 +50,8 @@ Microsoft.EntityFrameworkCore.SqlServer 3.1.11 (Core ve DataAccess katmanında)
 +Bütün sınıfları eklemek için kurallar eklendi. Kurallar Postman'de test edildi. 
 Eklemiş olduğum resimde Postman üzerinden kurallara uymayan bir post isteği gönderildi ve istek karşılanmadı.
 
-![HataResmi](https://ibb.co/fGqNy8F)
+![resim](https://user-images.githubusercontent.com/77545922/109542276-e98eba80-7ad5-11eb-90ab-bfda4065b5c1.PNG)
+
 
 ### Not
 
