@@ -14,6 +14,9 @@ Autofac.Extensions.DependencyInjection 7.1.0 (Core ve WebAPI katmanında)
 Autofac.Extras.DynamicProxy 6.0.0 (Business ve Core katmanında)
 FluentValidation 9.5.1 (Business ve Core katmanında)
 Microsoft.EntityFrameworkCore.SqlServer 3.1.11 (Core ve DataAccess katmanında)
+
+Microsoft.AspNetCore.Http.Abstractions v2.2.0 (Business)
+Microsoft.AspNetCore.Http.Features v5.0.3 (Business ve Core)
 ```
 
 ## :star:Geliştirmeler
@@ -51,6 +54,29 @@ Microsoft.EntityFrameworkCore.SqlServer 3.1.11 (Core ve DataAccess katmanında)
 Eklemiş olduğum resimde Postman üzerinden kurallara uymayan bir post isteği gönderildi ve istek karşılanmadı.
 
 ![resim](https://user-images.githubusercontent.com/77545922/109542276-e98eba80-7ad5-11eb-90ab-bfda4065b5c1.PNG)
+
+### 7.CarImages Tablosu oluşturuldu, FileHelper desteği eklendi.
++CarImages classı oluşturuldu. Service'i ve Manager'i yazıldı. DependencyResolvers'ta ataması çözüldü. ValidationRules'ta giriş kuralları yazıldı.
+
++Manager'da oluşturulan metot ile maksimum 5 resim sınırlandırılması getirildi.
+
++Eklenen resimlerin kendi belirlediğimiz Images dosyasında toplanması için FileHelper desteği eklendi.
+Microsoft.AspNetCore.Http.Abstractions v2.2.0 (Business)
+Microsoft.AspNetCore.Http.Features v5.0.3 (Business ve Core)
+paketleri yüklendi.
+
+Yapılan değişikliklerden sonra her arabaya birer resim eklendi.
+![ödev13](https://user-images.githubusercontent.com/77545922/110364409-c70c1c80-8054-11eb-954d-61d5c70b9605.PNG)
+
+Oluşan CarImages tablosu aşağıdaki gibidir.
+![ödev13 1](https://user-images.githubusercontent.com/77545922/110364492-e73bdb80-8054-11eb-9839-252ee070b199.PNG)
+
+5 resimden fazla yüklediğimizde gelen uyarı aşağıdaki gibidir.
+![ödev13 2](https://user-images.githubusercontent.com/77545922/110364571-fcb10580-8054-11eb-962e-9285b0474814.PNG)
+
+
+
+
 
 
 ### Not
