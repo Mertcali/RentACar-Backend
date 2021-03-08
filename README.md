@@ -57,6 +57,7 @@ Eklemiş olduğum resimde Postman üzerinden kurallara uymayan bir post isteği 
 
 ### 7.CarImages Tablosu oluşturuldu, FileHelper desteği eklendi.
 +CarImages classı oluşturuldu. Service'i ve Manager'i yazıldı. DependencyResolvers'ta ataması çözüldü. ValidationRules'ta giriş kuralları yazıldı.
+DataAccessLayer katmanı yazıldı. WebAPI'de CarImagesController oluşturuldu.
 
 +Manager'da oluşturulan metot ile maksimum 5 resim sınırlandırılması getirildi.
 
