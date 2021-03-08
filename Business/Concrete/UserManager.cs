@@ -35,19 +35,12 @@ namespace Business.Concrete
 
         public IDataResult<List<User>> GetAll()
         {
-            //if (DateTime.Now.Hour == 22)
-            //{
-            //    return new ErrorDataResult<List<User>>(Messages.MaintenanceTime);
-            //}
+
             return new SuccessDataResult<List<User>>(_userDal.GetAll(),Messages.UsersListed);
         }
 
         public IDataResult<User> GetByUserId(int Id)
         {
-            //if (DateTime.Now.Hour == 22)
-            //{
-            //    return new ErrorDataResult<User>(Messages.MaintenanceTime);
-            //}
             return new SuccessDataResult<User>(_userDal.Get(u => u.Id == Id), Messages.UsersListed);
         }
 

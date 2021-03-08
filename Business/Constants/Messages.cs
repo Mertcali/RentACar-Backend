@@ -42,9 +42,10 @@ namespace Business.Constants
         public static string RentalsListed = "Rental listelendi";
         public static string RentalsUpdated = "Rental güncellendi";
         public static string RentalReturnDateInvalid = "Rental teslim tarihi geçersiz";
+        public static string CarImageLimitExceeded = "Bir araç için resim sınırı aşıldı(5)";
 
 
-        //refactoring yapılacak kendini tekrar ettin
+        //refactor yapılacak kendini tekrar ettin
 
     }
 }

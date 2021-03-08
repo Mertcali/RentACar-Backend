@@ -37,21 +37,13 @@ namespace Business.Concrete
 
         public IDataResult<List<Brand>> GetAll()
         {
-            //if (DateTime.Now.Hour == 22)
-            //{
-            //    return new ErrorDataResult<List<Brand>>(Messages.MaintenanceTime);
-            //}
 
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), Messages.BrandsListed);
         }
 
         public IDataResult<Brand> GetById(int brandId)
         {
-            //if (DateTime.Now.Hour == 22)
-            //{
-            //    return new ErrorDataResult<List<Brand>>(Messages.MaintenanceTime);
-            //}
-            return new SuccessDataResult<Brand>(_brandDal.Get(b => b.BrandId == brandId ), Messages.BrandsListed);
+            return new SuccessDataResult<Brand>(_brandDal.Get(b => b.Id == brandId ), Messages.BrandsListed);
 
         }
 

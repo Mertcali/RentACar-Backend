@@ -37,10 +37,6 @@ namespace Business.Concrete
 
         public IDataResult<List<Color>> GetAll()
         {
-            //if (DateTime.Now.Hour == 22)
-            //{
-            //    return new ErrorDataResult<List<Color>>(Messages.MaintenanceTime);
-            //}
 
             return new SuccessDataResult<List<Color>>(_colorDal.GetAll(), Messages.ColorsListed);
 
@@ -48,12 +44,8 @@ namespace Business.Concrete
 
         public IDataResult<List<Color>> GetById(int colorId)
         {
-            //if (DateTime.Now.Hour == 22)
-            //{
-            //    return new ErrorDataResult<List<Color>>(Messages.MaintenanceTime);
-            //}
 
-            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(c=> c.ColorId == colorId), Messages.ColorsListed);
+            return new SuccessDataResult<List<Color>>(_colorDal.GetAll(c=> c.Id == colorId), Messages.ColorsListed);
         }
 
         public IResult Update(Color color)

@@ -1,6 +1,6 @@
 ﻿using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
-using DataAccess.Concrete.InMemory;
+//using DataAccess.Concrete.InMemory;
 using Entities.Concrete;
 using System;
 
@@ -19,7 +19,7 @@ namespace ConsoleUI
             //UserAddTest();
             //CustomerAddTest();
             //RentalAddTest();
-            RentalShowTest();
+            //RentalShowTest();
 
         }
 
@@ -99,16 +99,16 @@ namespace ConsoleUI
         private static void BrandTest()
         {
             BrandManager brandManager = new BrandManager(new EfBrandDal());
-            brandManager.Add(new Brand { BrandName = "Mercedes" });
-            brandManager.Add(new Brand { BrandName = "Honda" });
-            brandManager.Delete(new Brand { BrandId = 5 });
+            brandManager.Add(new Brand { Name = "Mercedes" });
+            brandManager.Add(new Brand { Name = "Honda" });
+            brandManager.Delete(new Brand { Id = 5 });
 
             var result = brandManager.GetAll();
             if (result.Success)
             {
                 foreach (var brand in result.Data)
                 {
-                    Console.WriteLine(brand.BrandId + "\t" + brand.BrandName);
+                    Console.WriteLine(brand.Id + "\t" + brand.Name);
                 }
 
             }
@@ -121,10 +121,13 @@ namespace ConsoleUI
         private static void ColorTest()
         {
             ColorManager colorManager = new ColorManager(new EfColorDal());
-            colorManager.Add(new Color { ColorName = "Sari" });
-            colorManager.Add(new Color { ColorName = "Turuncu" });
-            colorManager.Add(new Color { ColorName = "Yeşil" });
-            colorManager.Delete(new Color { ColorId = 10 });
+            colorManager.Add(new Color { Id = 1, Name = "Beyaz" });
+            colorManager.Add(new Color { Id = 2, Name = "Gri" });
+            colorManager.Add(new Color { Id = 3, Name = "Mavi" });
+            colorManager.Add(new Color { Id=4, Name = "Sari" });
+            colorManager.Add(new Color { Id=5, Name = "Turuncu" });
+            colorManager.Add(new Color { Id=6, Name = "Yeşil" });
+            colorManager.Delete(new Color { Id = 10 });
 
 
             var result = colorManager.GetAll();
@@ -132,7 +135,7 @@ namespace ConsoleUI
             {
                 foreach (var color in result.Data)
                 {
-                    Console.WriteLine(color.ColorId + "\t" + color.ColorName);
+                    Console.WriteLine(color.Id + "\t" + color.Name);
                 }
 
             }
