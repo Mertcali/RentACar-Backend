@@ -69,6 +69,7 @@ Yapılan değişikliklerden sonra her arabaya birer resim eklendi.
 ![ödev13](https://user-images.githubusercontent.com/77545922/110364409-c70c1c80-8054-11eb-954d-61d5c70b9605.PNG)
 
 Oluşan CarImages tablosu aşağıdaki gibidir.
+
 ![ödev13 1](https://user-images.githubusercontent.com/77545922/110364492-e73bdb80-8054-11eb-9839-252ee070b199.PNG)
 
 5 resimden fazla yüklediğimizde gelen uyarı aşağıdaki gibidir.
