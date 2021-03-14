@@ -17,6 +17,12 @@ Microsoft.EntityFrameworkCore.SqlServer 3.1.11 (Core ve DataAccess katmanında)
 
 Microsoft.AspNetCore.Http.Abstractions v2.2.0 (Business)
 Microsoft.AspNetCore.Http.Features v5.0.3 (Business ve Core)
+
+microsoft.AspNetCore.Authentication.JwtBearer 3.1.12  --> web api
+Microsoft.IdentityModel.Tokens.Jwt 6.8.0              --> core 
+Microsoft.IdentityModel.Tokens 6.8.0                  --> core
+Autofac.Extensions.DependencyInjection 7.1.0          --> business
+Microsoft.Extensions.DependencyInjection 5.0.1        --> business
 ```
 
 ## :star:Geliştirmeler
@@ -76,8 +82,108 @@ Oluşan CarImages tablosu aşağıdaki gibidir.
 5 resimden fazla yüklediğimizde gelen uyarı aşağıdaki gibidir.
 ![ödev13 2](https://user-images.githubusercontent.com/77545922/110364571-fcb10580-8054-11eb-962e-9285b0474814.PNG)
 
+### 8. JWT Altyapısı kuruldu.
 
+### Kurulan Paketler:
 
+microsoft.AspNetCore.Authentication.JwtBearer 3.1.12  --> web api
+
+Microsoft.IdentityModel.Tokens.Jwt 6.8.0              --> core 
+
+Microsoft.IdentityModel.Tokens 6.8.0                  --> core
+
+Autofac.Extensions.DependencyInjection 7.1.0          --> business
+
+Microsoft.Extensions.DependencyInjection 5.0.1        --> business
+
+### Özet
+
+Entities Concrete User Class'ı Core katmanına taşındı.
+User classında artık Password değil
+
+        public byte[] PasswordSalt { get; set; }
+        
+        public byte[] PasswordHash { get; set; }
+        
+        public bool Status { get; set; }
+        
+şeklinde bi tanımlama olduğu için tablosu yeniden oluşturuldu.
+**************************
++OperationClaims,UserOperationClaims tabloları oluşturuldu. Sınıfları oluşturuldu.
+**************************
++WebAPI appsettings kısmında TokenOptions oluşturuldu.
+**************************
++IUserService'e      
+
+       List<OperationClaim> GetClaims(User user);
+        User GetByMail(string email);
+        
+eklendi. Manager'da düzenlemeleri yapıldı.
+**************************
++Core-Utilities-Security
+(JWT-Hashing-Encryption) 
+klasörleri oluşturuldu.
+HashingHelper oluşturuldu.
+CreatePasswordHash ve VerifyPasswordHash metotları tanımlandı.
+**************************
++Security klasörünün içerisine Encryption klasörlemesi yapıldı.
+SecurityKeyHelper ve SigningCredentialHelper oluşturuldu.
+
+*SigningCredential bizim securitykey ve algoritmamızı belirlediğimiz bir nesnedir.*
+
+SecurityKey için microsoft.identitymodel.Tokens eklendi
+**************************
++Core-Utilities-Security-JWT klasörü oluşturup Token alışverişi için gerekli 
+sınıflar oluşturuldu.
+**************************
++JwtHelper'da configuration tanımlaması yapıldı. Bunun için 
+microsoft.extensions.configuration eklendi.
+*(appsettingsten gelen token bilgilerini configuration yapısı ile okumamız sağlanıyor.)*
+
+Constructorda yazdığımız
+
+*_tokenOptions = Configuration.GetSection("TokenOptions").Get<TokenOptions>();*
+  
+ile appsettingsteki tüm TokenOptions'ı tek seferde alıyoruz.
+**************************
++JwtHelper'da CreateToken için
+microsoft.identitymodel.Tokens kullanıldı
+
+JwtSecurityToken için System.identitymodel.tokens.jwt paketi kuruldu
+
+JwtSecurityToken'da Expires'ı tarih şeklinde set edebilmek için constructorda
+_accessTokenExpiration oluşturduk.
+**************************
+
+        var claims = new List<Claim>();
+        claims.Add(new Claim("email", user.Email));
+
+şeklinde hepsini teker teker yazmamak için claim nesnelerini extend ettik.
+Core Katmanında Extensions oluşturuldu.
+**************************
++JwtHelper işlemleri bittikten sonra Login,Register işlemleri yapacağımız katmana
+yani Business katmanına dönüyor ve IAuthService oluşturuyoruz.
+
+Business katmanındaki AuthManager'in login işlemi için 
+ve başka yerlerde de kullanmak için Core katmanında HashingHelper oluşturuldu.
+
+Manager işlemleri tamamlandı.
+**************************
++Api kısmında startup düzenlendi.
+Authentication için 
+Microsoft.AspNetCore.Authentication.JwtBearer paketi eklendi.	
+Authentication  -->giriş anahtarı
+Authorization   -->yetki
+
+### Testler ve Resimler
+---> Register işlemi ve oluşturulan token.
+![jwtregister](https://user-images.githubusercontent.com/77545922/111083790-3b94fe80-8520-11eb-855f-1a2441bd5894.PNG)
+
+---> Yetkisi verilmeyen kullanıcının araba eklemeyi denemesi.
+![jwtyetkinizreddedildi](https://user-images.githubusercontent.com/77545922/111083802-4bacde00-8520-11eb-9e73-a79059996345.PNG)
+
+---> Yetki verildikten sonra kullanıcının araç eklemeyi denemesi.
+![jwtyetkidensonra](https://user-images.githubusercontent.com/77545922/111083807-58313680-8520-11eb-893c-8ccde2755502.PNG)
 
 
 
