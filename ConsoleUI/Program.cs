@@ -1,8 +1,9 @@
 ﻿using Business.Concrete;
 using DataAccess.Concrete.EntityFramework;
 //using DataAccess.Concrete.InMemory;
-using Entities.Concrete;
+using Core.Entities.Concrete;
 using System;
+using Entities.Concrete;
 
 namespace ConsoleUI
 {
@@ -78,21 +79,21 @@ namespace ConsoleUI
                 FirstName = "Mert",
                 LastName = "Cali",
                 Email = "mertasa@gmail.com",
-                Password = "1235123"
+                //Password = "1235123"
             });
             userManager.Add(new User
             {
                 FirstName = "Omer",
                 LastName = "Say",
                 Email = "omer1234@gmail.com",
-                Password = "ab123123c"
+                //Password = "ab123123c"
             });
             userManager.Add(new User
             {
                 FirstName = "İsmail",
                 LastName = "Murat",
                 Email = "isotto@gmail.com",
-                Password = "n3guzelsifre"
+                //Password = "n3guzelsifre"
             });
         }
 

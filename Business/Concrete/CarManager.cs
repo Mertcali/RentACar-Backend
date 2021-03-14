@@ -1,4 +1,5 @@
 ﻿using Business.Abstract;
+using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
@@ -24,6 +25,7 @@ namespace Business.Concrete
             _carDal = carDal;
         }
 
+        [SecuredOperation("car.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Add(Car car)
         {
@@ -31,6 +33,7 @@ namespace Business.Concrete
             return new SuccessResult(Messages.CarsAdded);            
         }
 
+        [SecuredOperation("car.delete,admin")]
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
@@ -38,6 +41,7 @@ namespace Business.Concrete
             return new SuccessResult("Ürün Silindi");
         }
 
+        [SecuredOperation("car.getall,admin")]
         public IDataResult<List<Car>> GetAll()
         {
 
@@ -61,6 +65,8 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(),"Araç detayları:");
         }
 
+        [SecuredOperation("car.update,admin")]
+        [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car car)
         {
              _carDal.Update(car);

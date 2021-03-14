@@ -1,6 +1,7 @@
 ﻿using Entities.Concrete;
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace Business.Constants
@@ -43,6 +44,15 @@ namespace Business.Constants
         public static string RentalsUpdated = "Rental güncellendi";
         public static string RentalReturnDateInvalid = "Rental teslim tarihi geçersiz";
         public static string CarImageLimitExceeded = "Bir araç için resim sınırı aşıldı(5)";
+
+        public static string AuthorizationDenied = "Yetkiniz reddedildi";
+        public static string UserRegistered = "Kayıt olundu";
+        public static string UserNotFound = "Kullanıcı bulunamadı";
+        public static string PasswordError="Şifre hatalı";
+        public static string SuccessfulLogin="Başarılı giriş";
+        public static string UserAlreadyExists="Kullanıcı zaten mevcut";
+        public static string AccessTokenCreated="Token oluşturuldu";
+        public static string UserRegister="Kayıt olundu";
 
 
         //refactor yapılacak kendini tekrar ettin
