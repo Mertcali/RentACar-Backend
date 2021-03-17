@@ -2,6 +2,9 @@
 using Business.BusinessAspects.Autofac;
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
+using Core.Aspects.Autofac.Caching;
+using Core.Aspects.Autofac.Performance;
+using Core.Aspects.Autofac.Transaction;
 using Core.Aspects.Autofac.Validation;
 using Core.CrossCuttingConcerns.Validation;
 using Core.Utilities.Results;
@@ -27,6 +30,7 @@ namespace Business.Concrete
 
         [SecuredOperation("car.add,admin")]
         [ValidationAspect(typeof(CarValidator))]
+        [CacheRemoveAspect("ICarService.Get")]
         public IResult Add(Car car)
         {
             _carDal.Add(car);
@@ -42,6 +46,7 @@ namespace Business.Concrete
         }
 
         [SecuredOperation("car.getall,admin")]
+        [CacheAspect]
         public IDataResult<List<Car>> GetAll()
         {
 
@@ -60,6 +65,8 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId), "renk seçimine göre listelendi");
         }
 
+        [PerformanceAspect(10)]
+        [CacheAspect]
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(),"Araç detayları:");
@@ -70,6 +77,14 @@ namespace Business.Concrete
         public IResult Update(Car car)
         {
              _carDal.Update(car);
+            return new SuccessResult(Messages.CarsUpdated);
+        }
+
+        [TransactionScopeAspect]
+        public IResult AddTransactionalTest(Car car)
+        {
+            _carDal.Update(car);
+            _carDal.Add(car);
             return new SuccessResult(Messages.CarsUpdated);
         }
     }
