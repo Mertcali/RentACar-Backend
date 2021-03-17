@@ -185,6 +185,85 @@ Authorization   -->yetki
 ---> Yetki verildikten sonra kullanıcının araç eklemeyi denemesi.
 ![jwtyetkidensonra](https://user-images.githubusercontent.com/77545922/111083807-58313680-8520-11eb-893c-8ccde2755502.PNG)
 
+### 9. Cache-Transaction-Performance Yönetimi oluşturuldu.
+### Özet
+
+Core-Utilities-IoC klasöründe
+ICoreModule oluşturuldu. --> Genel bağımlılıklarımızı yükleteceğimiz arayüz.
+
+Core-DependencyResolvers klasörü oluşturuldu.
+-->Tüm projelerde kullanacağım injectionları kullanacağımız klasör.
+
+CoreModule oluşturuldu.
+--->Servis bağımlılıklarımızı çözümleyeceğimiz yer.
+**************************
+WebAPI startup kısmına 
+
+        services.AddDependencyResolvers(); 
+        
+bağımlılık çözümleme için eklendi.
+İleri zamanlarda daha çok injection yapabilmek için ServiceCollection extend edildi.
+Bu işlem Core-Extensions kısmında yapıldı.
+
+IServiceCollection-->Api'nin servis bağımlılıklarını eklediğimiz veya araya girmesini
+istediğimiz servisleri eklediğimiz koleksiyondur.
+**************************
+CACHE
+-->Birkaç şekilde yapılabilir.
+.netcore'un built-in cache mekanizmasını kullandık.(InMemoryCache)
+
+Yapılan istekler serverdaki belleklerde tutulur, cachede 
+o data varsa veritabanına gitmeksizin getirilir.
+
+Cachelemek istenilen data, bellekte key,value pair olarak tutulur.
+**************************
+Core-CrossCuttingConcerns'e Caching klasörü açıldı.
+ICacheManager interface'i yazıldı
+MemoryCacheManager oluşturuldu.
+
+IMemoryCache(Microsoft'un) interface olduğu için Manager içinde
+çözümlenmesi gerekiyor ancak constructor olarak çözemeyiz.
+Çünkü zincir webapi-business-dataaccess olarak ilerliyor.
+Aspect, bağımlılığın içinde değil bunun için ServiceTool yazdık.
+Onu da ICoreModule şeklinde enjekte etmiştik.
+ICoreModule'un içinde bağımlılık
+
+        serviceCollection.AddSingleton<ICacheManager, MemoryCacheManager>();
+
+şeklinde çözüldü.
+**************************
+//Adapter Pattern --> Microsoft'un cache sistemini kendimize uyarladık
+MemoryCacheManager ile.
+
+Core-Aspects-Autofac-Caching klasörü oluşturuldu.C
+acheAspect yazıldı.
+
+CacheRemoveAspect yazıldı.
+
+-Ne zaman çalışır?
+Data güncellenirse,silinirse...
+
+Aspectler Manager'a eklendi.
+Service'e 
+
+        IResult AddTransactionalTest(Product product);
+
+eklendi
+
+-Transaction Yönetimi nedir?
+Uygulamalarda tutarlılığı korumak için yapılan yöntem.
+Performance eklendi. ICoremodule'de çözüldü.
+
+### Testler ve Resimler
+Daha önceden kayıt olunan hesapla login olunarak token alındı.Alınan token ile "getall" çağırıldı. Test için CacheAspect'te bulunan 29. satıra breakpoint koyuldu.
+İlk işlemde bellekte tanınmadığı için kod aşağıdaki gibi çalıştı:
+![cachetrans1](https://user-images.githubusercontent.com/77545922/111510824-32de3b80-875f-11eb-8b4d-8aa1d6aa6e29.PNG)
+
+Daha sonra aynı işlem tekrarlandığında artık tanındığı için sonuç aşağıdaki gibi oldu:
+![cachetrans2](https://user-images.githubusercontent.com/77545922/111510935-4b4e5600-875f-11eb-88d5-ceda0ceb1602.PNG)
+
+
+
 
 
 ### Not
