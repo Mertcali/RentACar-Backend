@@ -22,10 +22,12 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         ICarDal _carDal;
+        IBrandService _brandService;
 
-        public CarManager(ICarDal carDal)
+        public CarManager(ICarDal carDal,IBrandService brandService)
         {
             _carDal = carDal;
+            _brandService = brandService;
         }
 
         [SecuredOperation("car.add,admin")]
@@ -34,49 +36,50 @@ namespace Business.Concrete
         public IResult Add(Car car)
         {
             _carDal.Add(car);
-            return new SuccessResult(Messages.CarsAdded);            
+            return new SuccessResult(Messages.CarsAdded);
         }
 
         [SecuredOperation("car.delete,admin")]
         public IResult Delete(Car car)
         {
             _carDal.Delete(car);
-            
+
             return new SuccessResult("Ürün Silindi");
         }
 
-        [SecuredOperation("car.getall,admin")]
+        //[SecuredOperation("car.getall,admin")]
         [CacheAspect]
         public IDataResult<List<Car>> GetAll()
         {
 
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(),Messages.CarsListed);         
+            return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarsListed);
         }
 
-        public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
+        public IDataResult<List<CarDetailDto>> GetCarsByBrandId(int brandId)
         {
 
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(b => b.BrandId == brandId), "marka seçimine göre listelendi");
+            //return new SuccessDataResult<List<Car>>(_carDal.GetAll(b => b.BrandId == brandId), "marka seçimine göre listelendi");
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.BrandId == brandId), "araçlar listelendi");
         }
 
-        public IDataResult<List<Car>> GetCarsByColorId(int colorId)
+        public IDataResult<List<CarDetailDto>> GetCarsByColorId(int colorId)
         {
 
-            return new SuccessDataResult<List<Car>>(_carDal.GetAll(c => c.ColorId == colorId), "renk seçimine göre listelendi");
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.ColorId == colorId),"araçlar listelendi");
         }
 
         [PerformanceAspect(10)]
         [CacheAspect]
         public IDataResult<List<CarDetailDto>> GetCarDetails()
         {
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(),"Araç detayları:");
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(), "Araç detayları:");
         }
 
         [SecuredOperation("car.update,admin")]
         [ValidationAspect(typeof(CarValidator))]
         public IResult Update(Car car)
         {
-             _carDal.Update(car);
+            _carDal.Update(car);
             return new SuccessResult(Messages.CarsUpdated);
         }
 
@@ -87,5 +90,11 @@ namespace Business.Concrete
             _carDal.Add(car);
             return new SuccessResult(Messages.CarsUpdated);
         }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetailsByBrandId(int carId)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.BrandId == carId));
+        }
+
     }
 }

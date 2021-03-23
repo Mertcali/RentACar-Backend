@@ -34,7 +34,7 @@ namespace ConsoleUI
                 Console.WriteLine("--------------------------------------------------RENTACARPROJECT");
                 foreach (var rent in result.Data)
                 {
-                    Console.WriteLine(rent.BrandName + "\t" + rent.CarName + "\t" + rent.DailyPrice + "\t" + "\t" + rent.RentDate);
+                    Console.WriteLine(rent.BrandName + "\t" + rent.CarName + "\t" + "\t" + "\t" + rent.RentDate);
                 }
             }
             else
@@ -125,9 +125,9 @@ namespace ConsoleUI
             colorManager.Add(new Color { Id = 1, Name = "Beyaz" });
             colorManager.Add(new Color { Id = 2, Name = "Gri" });
             colorManager.Add(new Color { Id = 3, Name = "Mavi" });
-            colorManager.Add(new Color { Id=4, Name = "Sari" });
-            colorManager.Add(new Color { Id=5, Name = "Turuncu" });
-            colorManager.Add(new Color { Id=6, Name = "Yeşil" });
+            colorManager.Add(new Color { Id = 4, Name = "Sari" });
+            colorManager.Add(new Color { Id = 5, Name = "Turuncu" });
+            colorManager.Add(new Color { Id = 6, Name = "Yeşil" });
             colorManager.Delete(new Color { Id = 10 });
 
 
@@ -151,109 +151,110 @@ namespace ConsoleUI
             Console.WriteLine("Marka\tAraç\tRenk\tGünlükÜcret\tAçıklama");
             Console.WriteLine("--------------------------------------------------RENTACARPROJECT");
 
-            CarManager carManager = new CarManager(new EfCarDal());
+            //CarManager carManager = new CarManager(new EfCarDal());
 
-            var result = carManager.GetCarDetails();
-            if (result.Success)
+            //    var result = carManager.GetCarDetails();
+            //    if (result.Success)
+            //    {
+            //        foreach (var car in result.Data)
+            //        {
+            //            Console.WriteLine(car.BrandName + "\t" + car.CarName + "\t" + car.ColorName + "\t" + car.DailyPrice + "\t        " + car.Description);
+            //        }
+            //    }
+            //    else
+            //    {
+            //        Console.WriteLine(result.Message);
+            //    }
+            //}
+
+            //private static void CoreLayerodevgun9()
+            //{
+            //    CarManager carManager = new CarManager(new EfCarDal());
+
+            //    Console.WriteLine("Marka\tAraç\tRenk\tGünlükÜcret\tAçıklama");
+            //    Console.WriteLine("--------------------------------------------------RENTACARPROJECT");
+
+            //    foreach (var car in carManager.GetCarDetails().Data)
+            //    {
+            //        Console.WriteLine(car.BrandName + "\t" + car.CarName + "\t" + car.ColorName + "\t" + car.DailyPrice + "\t        " + car.Description);
+            //    }
+            //}
+
+            /*
+            private static void BeforeCoreLayer()
             {
-                foreach (var car in result.Data)
+
+                Console.WriteLine("-----EntityFrameWorkCars-----");
+
+                CarManager carManager = new CarManager(new EfCarDal());
+                carManager.Add(new Car { BrandId = 3, ColorId = 2, DailyPrice = 500, ModelYear = "2016", Descriptions = "ab" });
+
+                foreach (var car in carManager.GetAll())
                 {
-                    Console.WriteLine(car.BrandName + "\t" + car.CarName + "\t" + car.ColorName + "\t" + car.DailyPrice + "\t        " + car.Description);
+                    Console.WriteLine(car.Descriptions);
+                }
+
+                Console.WriteLine("-----MARKA SEÇİMİNE GÖRE LİSTELEME-----");
+
+                CarManager carManager1 = new CarManager(new EfCarDal());
+
+                foreach (var car in carManager.GetCarsByBrandId(1))
+                {
+                    Console.WriteLine(car.Descriptions);
+                }
+
+                Console.WriteLine("-----GetCarDetails-----");
+
+                CarManager carManager2 = new CarManager(new EfCarDal());
+
+
+                Console.WriteLine("-----EntityFrameWorkBrands-----");
+
+                BrandManager brandManager = new BrandManager(new EfBrandDal());
+
+                foreach (var brand in brandManager.GetAll())
+                {
+                    Console.WriteLine(brand.BrandName);
+                }
+
+
+                Console.WriteLine("-----EntityFrameWorkColors-----");
+
+                ColorManager colorManager = new ColorManager(new EfColorDal());
+                foreach (var color in colorManager.GetAll())
+                {
+                    Console.WriteLine(color.ColorName);
                 }
             }
-            else
+            private static void InMemoryBellekteCalismaMethodu()
             {
-                Console.WriteLine(result.Message);
+                //INMEMORY BELLEKTE ÇALIŞTIĞIM CONSOLEUI ÇIKTILARIM
+
+                CarManager carManager = new CarManager(new InMemoryCarDal());
+                foreach (var car in carManager.GetAll())
+                {
+                    Console.WriteLine(car.CarId + "  idli araba: " + car.Descriptions + " ----" + car.DailyPrice + "  TL");
+                }
+
+                Console.WriteLine("--------BRANDS--------");
+
+                BrandManager brandManager = new BrandManager(new InMemoryBrandDal());
+                foreach (var brand in brandManager.GetAll())
+                {
+                    Console.WriteLine(brand.BrandName);
+                }
+
+                Console.WriteLine("--------COLORS--------");
+
+                ColorManager colorManager = new ColorManager(new InMemoryColorDal());
+                foreach (var color in colorManager.GetAll())
+                {
+                    Console.WriteLine(color.ColorName);
+                }
+
             }
+            */
         }
-
-        private static void CoreLayerodevgun9()
-        {
-            CarManager carManager = new CarManager(new EfCarDal());
-
-            Console.WriteLine("Marka\tAraç\tRenk\tGünlükÜcret\tAçıklama");
-            Console.WriteLine("--------------------------------------------------RENTACARPROJECT");
-
-            foreach (var car in carManager.GetCarDetails().Data)
-            {
-                Console.WriteLine(car.BrandName + "\t" + car.CarName + "\t" + car.ColorName + "\t" + car.DailyPrice + "\t        " + car.Description);
-            }
-        }
-
-        /*
-        private static void BeforeCoreLayer()
-        {
-            
-            Console.WriteLine("-----EntityFrameWorkCars-----");
-
-            CarManager carManager = new CarManager(new EfCarDal());
-            carManager.Add(new Car { BrandId = 3, ColorId = 2, DailyPrice = 500, ModelYear = "2016", Descriptions = "ab" });
-
-            foreach (var car in carManager.GetAll())
-            {
-                Console.WriteLine(car.Descriptions);
-            }
-
-            Console.WriteLine("-----MARKA SEÇİMİNE GÖRE LİSTELEME-----");
-
-            CarManager carManager1 = new CarManager(new EfCarDal());
-
-            foreach (var car in carManager.GetCarsByBrandId(1))
-            {
-                Console.WriteLine(car.Descriptions);
-            }
-
-            Console.WriteLine("-----GetCarDetails-----");
-
-            CarManager carManager2 = new CarManager(new EfCarDal());
-
-
-            Console.WriteLine("-----EntityFrameWorkBrands-----");
-
-            BrandManager brandManager = new BrandManager(new EfBrandDal());
-
-            foreach (var brand in brandManager.GetAll())
-            {
-                Console.WriteLine(brand.BrandName);
-            }
-
-
-            Console.WriteLine("-----EntityFrameWorkColors-----");
-
-            ColorManager colorManager = new ColorManager(new EfColorDal());
-            foreach (var color in colorManager.GetAll())
-            {
-                Console.WriteLine(color.ColorName);
-            }
-        }
-        private static void InMemoryBellekteCalismaMethodu()
-        {
-            //INMEMORY BELLEKTE ÇALIŞTIĞIM CONSOLEUI ÇIKTILARIM
-
-            CarManager carManager = new CarManager(new InMemoryCarDal());
-            foreach (var car in carManager.GetAll())
-            {
-                Console.WriteLine(car.CarId + "  idli araba: " + car.Descriptions + " ----" + car.DailyPrice + "  TL");
-            }
-
-            Console.WriteLine("--------BRANDS--------");
-
-            BrandManager brandManager = new BrandManager(new InMemoryBrandDal());
-            foreach (var brand in brandManager.GetAll())
-            {
-                Console.WriteLine(brand.BrandName);
-            }
-
-            Console.WriteLine("--------COLORS--------");
-
-            ColorManager colorManager = new ColorManager(new InMemoryColorDal());
-            foreach (var color in colorManager.GetAll())
-            {
-                Console.WriteLine(color.ColorName);
-            }
-        
-        }
-        */
     }
 }
 

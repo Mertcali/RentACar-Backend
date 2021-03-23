@@ -17,7 +17,22 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Images\" />
+    <None Include="wwwroot\Images\16c626ea-bfb5-4418-9239-1a2ccaa22c55.jpg" />
+    <None Include="wwwroot\Images\3de913f1-6d70-42ef-b51d-cf6b4c7fee2f.jpg" />
+    <None Include="wwwroot\Images\661b72f7-cb5d-44d8-99ef-0200fc49cb70_3_8_2021.jpg" />
+    <None Include="wwwroot\Images\6f3c2ef8-b98e-4fff-8d5f-4a0e691ad76e_3_8_2021.jpg" />
+    <None Include="wwwroot\Images\74cc332d-2abc-4099-939a-985468779475_3_8_2021.jpg" />
+    <None Include="wwwroot\Images\7f93c3cd-e3b0-4f77-9658-75420e073514_3_8_2021.jpg" />
+    <None Include="wwwroot\Images\99934f7f-34ad-43f6-bba1-18cced0343b1_3_8_2021.jpg" />
+    <None Include="wwwroot\Images\a8722a60-0c09-4f3e-9832-b01b99d8a09b_3_8_2021.jpeg" />
+    <None Include="wwwroot\Images\adf2be0a-510c-4468-8d04-d5e2a60b226d_3_8_2021.jpg" />
+    <None Include="wwwroot\Images\b6119bf6-780a-46ab-8000-8717e316ea96_3_22_2021.jpg" />
+    <None Include="wwwroot\Images\bb2abf33-f67a-4103-b9f5-6b5f9b68e4ec_3_8_2021.jpg" />
+    <None Include="wwwroot\Images\de782497-8ef8-4f0e-9d23-f3ead8c09f85_3_8_2021.jpg" />
+    <None Include="wwwroot\Images\e23eceb0-cd35-4a6d-8e47-34b0266512fb_3_8_2021.jpg" />
+    <None Include="wwwroot\Images\f7279b55-a04c-4ec4-a99b-f50b54949dfd_3_8_2021.jpg" />
+    <None Include="wwwroot\Images\fee9efea-568c-48e8-a5ed-aee52876b3d9_3_8_2021.jpg" />
+    <None Include="wwwroot\Images\logo.jpg" />
   </ItemGroup>
 
 

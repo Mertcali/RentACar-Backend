@@ -14,6 +14,7 @@ namespace Business.Concrete
     public class BrandManager : IBrandService
     {
         IBrandDal _brandDal;
+        ICarService _carService;
 
         public BrandManager(IBrandDal brandDal)
         {
@@ -40,6 +41,7 @@ namespace Business.Concrete
 
             return new SuccessDataResult<List<Brand>>(_brandDal.GetAll(), Messages.BrandsListed);
         }
+
 
         public IDataResult<Brand> GetById(int brandId)
         {
