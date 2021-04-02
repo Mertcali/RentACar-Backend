@@ -54,6 +54,14 @@ namespace Business.Constants
         public static string AccessTokenCreated="Token oluşturuldu";
         public static string UserRegister="Kayıt olundu";
 
+        public static string FakeCardAdded = "Kart oluşturuldu";
+        public static string FakeCardDeleted="Kart silindi";
+        public static string FakeCardsListed="Kartlar listelendi";
+        public static string FakeCardUpdated="Kartlar güncellendi";
+        public static string CardExists="Kart mevcut";
+        public static string CardCannotFound="Kart bulunamadı";
+
+
 
         //refactor yapılacak kendini tekrar ettin
 

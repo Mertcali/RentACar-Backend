@@ -55,12 +55,12 @@ namespace Business.Concrete
             return new SuccessDataResult<List<Car>>(_carDal.GetAll(), Messages.CarsListed);
         }
 
-        public IDataResult<List<CarDetailDto>> GetCarsByBrandId(int brandId)
-        {
+        //public IDataResult<List<Car>> GetCarsByBrandId(int brandId)
+        //{
 
-            //return new SuccessDataResult<List<Car>>(_carDal.GetAll(b => b.BrandId == brandId), "marka seçimine göre listelendi");
-            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.BrandId == brandId), "araçlar listelendi");
-        }
+        //    //return new SuccessDataResult<List<Car>>(_carDal.GetAll(b => b.BrandId == brandId), "marka seçimine göre listelendi");
+
+        //}
 
         public IDataResult<List<CarDetailDto>> GetCarsByColorId(int colorId)
         {
@@ -96,5 +96,14 @@ namespace Business.Concrete
             return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.BrandId == carId));
         }
 
+        public IDataResult<List<CarDetailDto>> GetCarByCarId(int id)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.CarId == id));
+        }
+
+        public IDataResult<List<CarDetailDto>> GetCarDetailsByCarId(int id)
+        {
+            return new SuccessDataResult<List<CarDetailDto>>(_carDal.GetCarDetails(c => c.CarId == id));
+        }
     }
 }
