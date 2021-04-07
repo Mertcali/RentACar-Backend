@@ -76,7 +76,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("GetByCardNumber")]
+        [HttpGet("getbycardnumber")]
         public IActionResult GetByCardNumber(string cardNumber)
         {
             var result = _fakeCardService.GetByCardNumber(cardNumber);
@@ -87,7 +87,7 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("iscardexist")]
+        [HttpPost("iscardexist")]
         public IActionResult IsCardExist(FakeCard fakeCard)
         {
             var result = _fakeCardService.IsCardExist(fakeCard);

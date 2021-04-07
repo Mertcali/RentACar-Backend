@@ -2,6 +2,7 @@
 using Business.Constants;
 using Business.ValidationRules.FluentValidation;
 using Core.Aspects.Autofac.Validation;
+using Core.Utilities.Business;
 using Core.Utilities.Results;
 using DataAccess.Abstract;
 using Entities.Concrete;
@@ -52,12 +53,13 @@ namespace Business.Concrete
 
         public IResult IsCardExist(FakeCard fakeCard)
         {
-            var result = _fakeCardDal.Get(c => c.NameOnCard == fakeCard.NameOnCard && c.CardNumber == fakeCard.CardNumber && c.CardCVV == fakeCard.CardCVV);
+            var result = _fakeCardDal.Get(c => c.NameOnCard == fakeCard.NameOnCard && c.CardNumber == fakeCard.CardNumber && c.CardCVV == fakeCard.CardCVV && c.LastNameOnCard == fakeCard.LastNameOnCard);
             if (result == null)
             {
                 return new ErrorResult(Messages.CardCannotFound);
             }
             return new SuccessResult(Messages.CardExists);
+
         }
 
         public IResult Update(FakeCard fakeCard)
@@ -65,5 +67,18 @@ namespace Business.Concrete
             _fakeCardDal.Update(fakeCard);
             return new SuccessResult(Messages.FakeCardUpdated);
         }
+
+        private IResult IsCardAvailable(FakeCard fakeCard)
+        {
+            var result = _fakeCardDal.GetAll(c => c.NameOnCard == fakeCard.NameOnCard && c.CardNumber == fakeCard.CardNumber && c.CardCVV == fakeCard.CardCVV && c.LastNameOnCard == fakeCard.LastNameOnCard) ;
+            if (result==null)
+            {
+                return new ErrorResult(Messages.CardCannotFound);
+            }
+            return new SuccessResult(Messages.CardExists);
+        }
+
+
+
     }
 }
