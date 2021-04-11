@@ -98,6 +98,16 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
+        [HttpGet("getbyuserid")]
+        public IActionResult GetByUserId(int id)
+        {
+            var result = _fakeCardService.GetByUserId(id);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+            return BadRequest(result);
+        }
 
 
     }

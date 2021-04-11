@@ -15,5 +15,6 @@ namespace Business.Abstract
         IResult Add(FakeCard fakeCard);
         IResult Delete(FakeCard fakeCard);
         IResult Update(FakeCard fakeCard);
+        IDataResult<List<FakeCard>> GetByUserId(int id);
     }
 }

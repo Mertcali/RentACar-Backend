@@ -8,6 +8,7 @@ namespace Business.Constants
 {
     public static class Messages
     {
+        
         public static string CarsAdded = "Araç eklendi";    
         public static string CarNameInvalid = "Araç ismi geçersiz";
         public static string MaintenanceTime = "Sistem bakımda";
@@ -51,7 +52,7 @@ namespace Business.Constants
         public static string PasswordError="Şifre hatalı";
         public static string SuccessfulLogin="Başarılı giriş";
         public static string UserAlreadyExists="Kullanıcı zaten mevcut";
-        public static string AccessTokenCreated="Token oluşturuldu";
+        public static string AccessTokenCreated="Giriş başarılı";
         public static string UserRegister="Kayıt olundu";
 
         public static string FakeCardAdded = "Kart oluşturuldu";
@@ -60,10 +61,11 @@ namespace Business.Constants
         public static string FakeCardUpdated="Kartlar güncellendi";
         public static string CardExists="Kart mevcut";
         public static string CardCannotFound="Kart bulunamadı";
-
-
-
-        //refactor yapılacak kendini tekrar ettin
-
+        public static string FindexAdded = "Findex Eklendi";
+        public static string FindexDeleted = "Findex Silindi";
+        public static string FindexUpdated = "Findex Güncellendi";
+        public static string FindexListed = "Findex Listelendi";
+        public static string findexPointAdded = "Puan Eklendi";
+        public static string findexPointFull = "Puan Eklendi";
     }
 }

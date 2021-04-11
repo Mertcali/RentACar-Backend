@@ -19,8 +19,7 @@ namespace DataAccess.Concrete.EntityFramework
                 var result = from r in filter == null ? context.Rentals : context.Rentals.Where(filter)
                              join c in context.Cars on r.CarId equals c.Id
                              join b in context.Brands on c.BrandId equals b.Id
-                             join cu in context.Customers on r.CustomerId equals cu.Id
-                             join u in context.Users on cu.UserId equals u.Id
+                             join u in context.Users on r.UserId equals u.Id
                              join co in context.Colors on c.ColorId equals co.Id
                              select new RentalDetailDto
                              {
@@ -30,14 +29,14 @@ namespace DataAccess.Concrete.EntityFramework
                                  FirstName = u.FirstName,
                                  LastName = u.LastName,
                                  CarName = c.CarName,
-                                 CompanyName = cu.CompanyName,
+                                 UserId = u.Id,
                                  BrandName = b.Name,
                                  RentDate = r.RentDate,
                                  ReturnDate = r.ReturnDate,
                                  CarDescription = c.Descriptions,
                                  CarModelYear = c.ModelYear,
                                  ColorName = co.Name,
-                                 CustomerId = cu.Id,
+
                                  
                              };
                 return result.ToList();

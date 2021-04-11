@@ -42,6 +42,9 @@ namespace Business.DependencyResolvers.Autofac
             builder.RegisterType<FakeCardManager>().As<IFakeCardService>().SingleInstance();
             builder.RegisterType<EfFakeCardDal>().As<IFakeCardDal>().SingleInstance();
 
+            builder.RegisterType<FindexManager>().As<IFindexService>().SingleInstance();
+            builder.RegisterType<EfFindexDal>().As<IFindexDal>().SingleInstance();
+
             builder.RegisterType<AuthManager>().As<IAuthService>();
             builder.RegisterType<JwtHelper>().As<ITokenHelper>();
 

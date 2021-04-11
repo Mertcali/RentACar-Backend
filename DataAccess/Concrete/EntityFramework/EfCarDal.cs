@@ -34,6 +34,7 @@ namespace DataAccess.Concrete.EntityFramework
                              ModelYear = car.ModelYear,
                              BrandId = brand.Id,
                              ColorId = col.Id,
+                             MinFindex = car.MinFindex,
                              ImagePath = (from a in context.CarImages where a.CarId == car.Id select a.ImagePath).FirstOrDefault()
                          };
 

@@ -11,19 +11,19 @@ namespace WebAPI.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class CustomersController : ControllerBase
+    public class FindexController : ControllerBase
     {
-        ICustomerService _customerService;
+        IFindexService _findexService;
 
-        public CustomersController(ICustomerService customerService)
+        public FindexController(IFindexService findexService)
         {
-            _customerService = customerService;
+            _findexService = findexService;
         }
 
         [HttpPost("add")]
-        public IActionResult Add(Customer customer)
+        public IActionResult Add(Findex findex)
         {
-            var result = _customerService.Add(customer);
+            var result = _findexService.Add(findex);
             if (result.Success)
             {
                 return Ok(result);
@@ -32,9 +32,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("delete")]
-        public IActionResult Delete(Customer customer)
+        public IActionResult Delete(Findex findex)
         {
-            var result = _customerService.Delete(customer);
+            var result = _findexService.Delete(findex);
             if (result.Success)
             {
                 return Ok(result);
@@ -43,20 +43,9 @@ namespace WebAPI.Controllers
         }
 
         [HttpPost("update")]
-        public IActionResult Update(Customer customer)
+        public IActionResult Update(Findex findex)
         {
-            var result = _customerService.Update(customer);
-            if (result.Success)
-            {
-                return Ok(result);
-            }
-            return BadRequest(result);
-        }
-
-        [HttpGet("getbyuserid")]
-        public IActionResult GetByUserId(int id)
-        {
-            var result = _customerService.GetByUserId(id);
+            var result = _findexService.Update(findex);
             if (result.Success)
             {
                 return Ok(result);
@@ -67,7 +56,7 @@ namespace WebAPI.Controllers
         [HttpGet("getall")]
         public IActionResult GetAll()
         {
-            var result = _customerService.GetAll();
+            var result = _findexService.GetAll();
             if (result.Success)
             {
                 return Ok(result);
@@ -75,14 +64,26 @@ namespace WebAPI.Controllers
             return BadRequest(result);
         }
 
-        [HttpGet("getbymail")]
-        public IActionResult GetByMail(string email)
+        [HttpGet("getbyuserid")]
+        public IActionResult GetByUserId(int id)
         {
-            var result = _customerService.GetByMail(email);
+            var result = _findexService.GetByUserId(id);
             if (result.Success)
             {
                 return Ok(result);
             }
+            return BadRequest(result);
+        }
+
+        [HttpPost("addfindexpoint")]
+        public IActionResult AddFindexPoint(int userId)
+        {
+            var result = _findexService.AddFindex(userId);
+            if (result.Success)
+            {
+                return Ok(result);
+            }
+
             return BadRequest(result);
         }
 

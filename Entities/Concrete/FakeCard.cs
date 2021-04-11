@@ -8,6 +8,7 @@ namespace Entities.Concrete
     public class FakeCard:IEntity
     {
         public int Id { get; set; }
+        public int UserId { get; set; }
         public string NameOnCard { get; set; }
         public string LastNameOnCard { get; set; }
         public string CardNumber { get; set; }
